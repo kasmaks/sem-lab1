@@ -21,6 +21,6 @@ export default class Country {
 	}
 
 	isComplete() {
-		this.cities.every(city => city.isComplete());
+		return this.cities.every(city => city.isComplete());
 	}
 }

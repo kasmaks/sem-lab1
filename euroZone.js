@@ -89,8 +89,8 @@ export default class Eurozone {
 					city.updateCoins();
 				}
 			}
+
 			iterations++;
-			console.log(iterations);
 		} while (!this.areAllCitiesCompleted());
 
 		for (const country of this.countires) {
@@ -105,7 +105,7 @@ export default class Eurozone {
 	}
 
 	areAllCitiesCompleted = () => {
-		this.countires.every(country => country.isComplete());
+		return this.countires.every(country => country.isComplete());
 	}
 
 	getCityKey = (x, y) => {

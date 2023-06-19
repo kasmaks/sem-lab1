@@ -19,7 +19,7 @@ export default class City {
 	}
 
 	isComplete() {
-		this.coins.every(coin => coin > 0);
+		return this.coins.every(coin => coin > 0);
 	}
 
 	moveCoinsToNeighbors() {

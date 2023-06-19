@@ -1,3 +1,5 @@
+import fs from "fs";
+
 import FileReader from "./fileReader.js";
 import Country from "./country.js";
 import Eurozone from "./eurozone.js";
@@ -8,15 +10,23 @@ const playGame = (countriesStringMatrix) => {
 		const country = new Country(...countryString.split(" "));
 		countries.push(country);
 	}
-	console.log(countries);
 	const eurozone = new Eurozone(countries);
-	console.log(JSON.stringify(eurozone.startGame()));
+	const resultMap = eurozone.startGame();
+	let resultString = "";
+	resultMap.forEach((value, key) => {
+		resultString += `${key} ${value} \n`;
+	});
+
+	return resultString;
 };
 
 const countriesStringMatrix = FileReader.parseInputFile("input.txt");
-console.log(countriesStringMatrix);
+
+let result = "";
 
 countriesStringMatrix.forEach((countries, i) => {
-	console.log(i);
-	playGame(countries);
+	result += `Case Number ${i + 1}\n`;
+	result += playGame(countries);
 });
+
+fs.writeFileSync("output.txt", result);
