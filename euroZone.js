@@ -82,13 +82,15 @@ export default class Eurozone {
 						result.set(country.name, iterations);
 					}
 				}
+			}
 
+			for (const country of this.countires) {
 				for (const city of country.cities) {
 					city.updateCoins();
 				}
 			}
 			iterations++;
-			//console.log(iterations);
+			console.log(iterations);
 		} while (!this.areAllCitiesCompleted());
 
 		for (const country of this.countires) {
