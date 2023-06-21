@@ -17,7 +17,7 @@ export default class FileReader {
 		let line = input[index];
 		while (line !== "0") {
 			let countriesNumber = parseInt(line);
-			if (countriesNumber != "NaN") {
+			if (!Number.isNaN(countriesNumber)) {
 				const countries = [];
 				for (let i = 0; i < countriesNumber; i++) {
 					countries.push(input[++index].trim());
