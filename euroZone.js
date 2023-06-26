@@ -1,9 +1,9 @@
 import City from "./city.js";
 
-const MAX_X = 10;
-const MAX_Y = 10;
-
 export default class Eurozone {
+
+	static MAX_X = 10;
+	static MAX_Y = 10;
 
 	countires;
 	cities = new Map();
@@ -29,40 +29,53 @@ export default class Eurozone {
 	}
 
 	initCitiesNeighbors() {
-		for (let x = 0; x <= MAX_X; x++) {
-			for (let y = 0; y <= MAX_Y; y++) {
+		for (let x = 0; x <= this.MAX_X; x++) {
+			for (let y = 0; y <= this.MAX_Y; y++) {
 				const city = this.cities.get(this.getCityKey(x, y));
 				if (!city) {
 					continue;
 				}
 
-				if (x > 1) {
-					const leftNeighbor = this.cities.get(this.getCityKey(x - 1, y));
-					if (leftNeighbor) {
-						city.neighbors.push(leftNeighbor);
-					}
-				}
+				this.addLeftNeighbor(x, y, city);
+				this.addRightNeighbor(x, y, city);
+				this.addBottomNeighbor(x, y, city);
+				this.addTopNeighbor(x, y, city);
+			}
+		}
+	}
 
-				if (x < MAX_X - 1) {
-					const rightNeighbor = this.cities.get(this.getCityKey(x + 1, y));
-					if (rightNeighbor) {
-						city.neighbors.push(rightNeighbor);
-					}
-				}
+	addLeftNeighbor = (x, y, city) => {
+		if (x > 1) {
+			const leftNeighbor = this.cities.get(this.getCityKey(x - 1, y));
+			if (leftNeighbor) {
+				city.neighbors.push(leftNeighbor);
+			}
+		}
+	}
+	
+	addRightNeighbor = (x, y, city) => {
+		if (x < this.MAX_X - 1) {
+			const rightNeighbor = this.cities.get(this.getCityKey(x + 1, y));
+			if (rightNeighbor) {
+				city.neighbors.push(rightNeighbor);
+			}
+		}
+	}
 
-				if (y > 1) {
-					const bottomNeighbor = this.cities.get(this.getCityKey(x, y - 1));
-					if (bottomNeighbor) {
-						city.neighbors.push(bottomNeighbor);
-					}
-				}
+	addBottomNeighbor = (x, y, city) => {
+		if (y > 1) {
+			const bottomNeighbor = this.cities.get(this.getCityKey(x, y - 1));
+			if (bottomNeighbor) {
+				city.neighbors.push(bottomNeighbor);
+			}
+		}
+	}
 
-				if (y < MAX_Y - 1) {
-					const topNeighbor = this.cities.get(this.getCityKey(x, y + 1));
-					if (topNeighbor) {
-						city.neighbors.push(topNeighbor);
-					}
-				}
+	addTopNeighbor = (x, y, city) => {
+		if (y < this.MAX_Y - 1) {
+			const topNeighbor = this.cities.get(this.getCityKey(x, y + 1));
+			if (topNeighbor) {
+				city.neighbors.push(topNeighbor);
 			}
 		}
 	}
